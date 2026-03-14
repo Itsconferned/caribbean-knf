@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NF Solution Calculators | Caribbean KNF</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="KNF.html" class="logo">
+                <span class="logo-icon">&#x1F331;</span>
+                <span class="logo-text">Caribbean KNF</span>
+            </a>
+            <nav class="nav">
+                <a href="inputs.html" class="nav-link">Inputs</a>
+                <a href="recipes.html" class="nav-link">Recipes</a>
+                <a href="calculators.html" class="nav-link">Calculators</a>
+                <a href="knfcalculators.html" class="nav-link active">Agricultural KNF</a>
+                <a href="protocol.html" class="nav-link">Protocol</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- NF Solution Calculators -->
+    <section id="nf-calculators" class="section section-alt page-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Natural Farming</p>
+                <h2 class="section-title">Solution Calculators</h2>
+                <p class="section-description">Select a solution below, enter your water volume in gallons, and get
+                    precise ml measurements for each input.</p>
+            </div>
+
+            <div class="calculator-tabs" id="solutionTabs">
+                <button class="tab-btn active" data-tab="soil-foundation">Soil Foundation</button>
+                <button class="tab-btn" data-tab="maintenance">Maintenance</button>
+                <button class="tab-btn" data-tab="enhanced-ripening">Enhanced Ripening</button>
+                <button class="tab-btn" data-tab="type-iii">Type III</button>
+                <button class="tab-btn" data-tab="type-ii">Type II</button>
+                <button class="tab-btn" data-tab="changeover">Changeover</button>
+                <button class="tab-btn" data-tab="imo3">IMO 3</button>
+                <button class="tab-btn" data-tab="imo4">IMO 4</button>
+                <button class="tab-btn" data-tab="liquid-imo">Liquid IMO</button>
+                <button class="tab-btn" data-tab="fermented-sw">Fermented SW</button>
+            </div>
+
+            <div class="calculator-container" id="calculatorContainer">
+                <!-- Panels rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">&#x1F331; Caribbean KNF</span>
+                    <p>Sustainable farming through Korean Natural Farming practices.</p>
+                </div>
+                <div class="footer-nav">
+                    <a href="inputs.html">Inputs</a>
+                    <a href="recipes.html">Recipes</a>
+                    <a href="calculators.html">Calculators</a>
+                    <a href="knfcalculators.html">Agricultural KNF</a>
+                    <a href="protocol.html">Protocol</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Designed for Caribbean Farmers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // CALCULATOR DATA
+        // ============================================
+        const GALLON_TO_ML = 3785.41;
+
+        const calculators = {
+            'soil-foundation': {
+                title: 'Soil Foundation',
+                badge: '1 week before planting',
+                rows: [
+                    { input: 'OHN', ratio: '1:1000' },
+                    { input: 'FPJ', ratio: '1:500' },
+                    { input: 'BRV', ratio: '1:500' },
+                    { input: 'SW', ratio: '1:30' }
+                ],
+                note: 'Cut cover crop after IMO 4 application.'
+            },
+            'maintenance': {
+                title: 'Maintenance / Seed Treatment',
+                badge: 'Regular use',
+                rows: [
+                    { input: 'OHN', ratio: '1:1000' },
+                    { input: 'FPJ', ratio: '1:500' },
+                    { input: 'BRV', ratio: '1:500' }
+                ]
+            },
+            'enhanced-ripening': {
+                title: 'Enhanced Ripening',
+                badge: 'Fruiting stage',
+                rows: [
+                    { input: 'OHN', ratio: '1:1000' },
+                    { input: 'FPJ', ratio: '1:500' },
+                    { input: 'BRV', ratio: '1:500' },
+                    { input: 'SW', ratio: '1:30' },
+                    { input: 'WCA', ratio: '1:1000' }
+                ],
+                note: 'Stop BRV 2 weeks before harvest.'
+            },
+            'type-iii': {
+                title: 'Type III / Reproductive Growth',
+                badge: 'Flowering phase',
+                rows: [
+                    { input: 'OHN', ratio: '1:1000' },
+                    { input: 'FPJ', ratio: '1:500' },
+                    { input: 'BRV', ratio: '1:500' },
+                    { input: 'WCA', ratio: '1:1000' }
+                ]
+            },
+            'type-ii': {
+                title: 'Type II / Vegetative Growth',
+                badge: 'Growth phase',
+                rows: [
+                    { input: 'OHN', ratio: '1:1000' },
+                    { input: 'FPJ', ratio: '1:500' },
+                    { input: 'BRV', ratio: '1:500' },
+                    { input: 'FAA', ratio: '1:1000' }
+                ]
+            },
+            'changeover': {
+                title: 'Changeover Period',
+                badge: 'Transition phase',
+                rows: [
+                    { input: 'OHN', ratio: '1:1000' },
+                    { input: 'FPJ', ratio: '1:500' },
+                    { input: 'BRV', ratio: '1:500' },
+                    { input: 'WCAP/WCP', ratio: '1:1000' }
+                ]
+            },
+            'imo3': {
+                title: 'IMO 3',
+                badge: 'Soil inoculant',
+                rows: [
+                    { input: 'OHN', ratio: '1:1000' },
+                    { input: 'FPJ', ratio: '1:500' },
+                    { input: 'BRV', ratio: '1:500' },
+                    { input: 'Humic Acid', ratio: '1:750' },
+                    { input: 'SW', ratio: '1:20' }
+                ],
+                note: 'Add water and IMO 2 as base.'
+            },
+            'imo4': {
+                title: 'IMO 4',
+                badge: 'Soil inoculant',
+                rows: [
+                    { input: 'OHN', ratio: '1:1000' },
+                    { input: 'FPJ', ratio: '1:500' },
+                    { input: 'BRV', ratio: '1:500' },
+                    { input: 'Humic Acid', ratio: '1:750' },
+                    { input: 'SW', ratio: '1:20' }
+                ],
+                note: 'Add water and IMO 2 as base.'
+            },
+            'liquid-imo': {
+                title: 'Liquid IMO (LIMO)',
+                badge: 'Liquid inoculant',
+                rows: [
+                    { input: 'OHN', ratio: '1:1000' },
+                    { input: 'FPJ', ratio: '1:500' },
+                    { input: 'BRV', ratio: '1:500' },
+                    { input: 'Humic Acid', ratio: '1:750' },
+                    { input: 'SW', ratio: '1:20' }
+                ],
+                note: 'Add IMO 2, 3, or 4 as base.'
+            },
+            'fermented-sw': {
+                title: 'Fermented Sea Water',
+                badge: 'Mineral boost',
+                rows: [
+                    { input: 'FPJ', ratio: '1:300' },
+                    { input: 'LAB', ratio: '1:700' },
+                    { input: 'SW', ratio: '1:30' }
+                ],
+                note: 'Ready after 24 hours.'
+            }
+        };
+
+        // ============================================
+        // HELPERS
+        // ============================================
+        function parseRatio(ratioStr) {
+            const parts = ratioStr.split(':');
+            return parts.length === 2 ? parseFloat(parts[0]) / parseFloat(parts[1]) : 0;
+        }
+
+        function formatNumber(num) {
+            const parsed = parseFloat(num);
+            if (isNaN(parsed)) return '0';
+            if (parsed === Math.floor(parsed)) return parsed.toString();
+            return parseFloat(parsed.toFixed(2)).toString();
+        }
+
+        // ============================================
+        // BUILD PANELS
+        // ============================================
+        function buildPanels() {
+            const container = document.getElementById('calculatorContainer');
+
+            Object.keys(calculators).forEach((key, idx) => {
+                const calc = calculators[key];
+                const isActive = idx === 0 ? ' active' : '';
+
+                let resultsHtml = calc.rows.map(row => {
+                    const id = key + '-' + row.input.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    return `
+                        <div class="result-card">
+                            <span class="result-value" id="${id}" data-ratio="${row.ratio}" data-key="${key}">0</span>
+                            <span class="result-label">ml ${row.input}</span>
+                        </div>`;
+                }).join('');
+
+                const noteHtml = calc.note
+                    ? `<p class="calc-note">${calc.note}</p>`
+                    : '';
+
+                const panelHtml = `
+                    <div class="calculator-panel${isActive}" id="${key}">
+                        <div class="calc-header">
+                            <h3>${calc.title}</h3>
+                            <span class="calc-badge">${calc.badge}</span>
+                        </div>
+                        <div class="calc-body">
+                            <div class="calc-input-section">
+                                <label for="${key}-gallons">Water Volume</label>
+                                <div class="input-group">
+                                    <input type="number" id="${key}-gallons" value="1" min="0.1" step="0.1"
+                                           data-key="${key}">
+                                    <select id="${key}-unit" data-key="${key}">
+                                        <option value="gallons">Gallons</option>
+                                        <option value="liters">Liters</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="calc-results">
+                                ${resultsHtml}
+                            </div>
+                            ${noteHtml}
+                        </div>
+                    </div>`;
+
+                container.insertAdjacentHTML('beforeend', panelHtml);
+            });
+        }
+
+        // ============================================
+        // CALCULATE
+        // ============================================
+        function calculateForKey(key) {
+            const input = document.getElementById(key + '-gallons');
+            const unitSelect = document.getElementById(key + '-unit');
+            if (!input || !unitSelect) return;
+
+            let value = parseFloat(input.value) || 0;
+            const unit = unitSelect.value;
+
+            // Convert to gallons if liters entered
+            const gallons = unit === 'liters' ? value / 3.78541 : value;
+            const totalMl = gallons * GALLON_TO_ML;
+
+            const calc = calculators[key];
+            calc.rows.forEach(row => {
+                const id = key + '-' + row.input.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const el = document.getElementById(id);
+                if (el) {
+                    const ml = totalMl * parseRatio(row.ratio);
+                    el.textContent = formatNumber(ml.toFixed(1));
+                }
+            });
+        }
+
+        function calculateAll() {
+            Object.keys(calculators).forEach(calculateForKey);
+        }
+
+        // ============================================
+        // TABS
+        // ============================================
+        function initTabs() {
+            const tabBtns = document.querySelectorAll('#solutionTabs .tab-btn');
+            const panels = document.querySelectorAll('.calculator-panel');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetTab = btn.dataset.tab;
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    panels.forEach(panel => {
+                        panel.classList.remove('active');
+                        if (panel.id === targetTab) panel.classList.add('active');
+                    });
+                });
+            });
+        }
+
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+        function initListeners() {
+            document.querySelectorAll('.calc-input-section input, .calc-input-section select').forEach(el => {
+                const key = el.dataset.key;
+                el.addEventListener('input', () => calculateForKey(key));
+                el.addEventListener('change', () => calculateForKey(key));
+            });
+        }
+
+        // ============================================
+        // INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('.nav');
+            if (menuBtn && nav) {
+                menuBtn.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                    menuBtn.classList.toggle('active');
+                });
+                nav.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        nav.classList.remove('active');
+                        menuBtn.classList.remove('active');
+                    });
+                });
+            }
+
+            buildPanels();
+            initTabs();
+            initListeners();
+            calculateAll();
+        });
+    </script>
+</body>
+
+</html>

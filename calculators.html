@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixture Calculators | Caribbean KNF for Poultry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="KNF.html" class="logo">
+                <span class="logo-icon">&#x1F331;</span>
+                <span class="logo-text">Caribbean KNF</span>
+            </a>
+            <nav class="nav">
+                <a href="inputs.html" class="nav-link">Inputs</a>
+                <a href="recipes.html" class="nav-link">Recipes</a>
+                <a href="calculators.html" class="nav-link active">Calculators</a>
+                <a href="knfcalculators.html" class="nav-link">Agricultural KNF</a>
+                <a href="protocol.html" class="nav-link">Protocol</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Calculators Section -->
+    <section id="calculators" class="section section-alt page-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Tools</p>
+                <h2 class="section-title">Mixture Calculators</h2>
+                <p class="section-description">Enter your quantities and get precise measurements for each formula.</p>
+            </div>
+
+            <div class="calculator-tabs">
+                <button class="tab-btn active" data-tab="chick-water">Chick Water</button>
+                <button class="tab-btn" data-tab="calcium">Calcium</button>
+                <button class="tab-btn" data-tab="fermented-feed">Fermented Feed</button>
+                <button class="tab-btn" data-tab="sos-mix">Coop Bedding Spray</button>
+                <button class="tab-btn" data-tab="sea-water">Fermented Sea Water</button>
+            </div>
+
+            <div class="calculator-container">
+                <!-- Chick Water Calculator -->
+                <div class="calculator-panel active" id="chick-water">
+                    <div class="calc-header">
+                        <h3>Chick Water Formula</h3>
+                        <span class="calc-badge">Daily drinking water</span>
+                    </div>
+                    <div class="calc-body">
+                        <div class="calc-input-section">
+                            <label for="cw-gallons">Water Volume</label>
+                            <div class="input-group">
+                                <input type="number" id="cw-gallons" value="1" min="0.1" step="0.1">
+                                <select id="cw-unit">
+                                    <option value="gallons">Gallons</option>
+                                    <option value="liters">Liters</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="calc-results">
+                            <div class="result-card">
+                                <span class="result-value" id="cw-labs">4</span>
+                                <span class="result-label">ml LABs</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-value" id="cw-fpj">13</span>
+                                <span class="result-label">ml FPJ</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-value" id="cw-vinegar">19</span>
+                                <span class="result-label">ml Vinegar</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-value" id="cw-seawater">133</span>
+                                <span class="result-label">ml Sea Water</span>
+                            </div>
+                            <div class="result-card alt">
+                                <span class="result-value" id="cw-salt">3</span>
+                                <span class="result-label">g Sea Salt (alt)</span>
+                            </div>
+                        </div>
+                        <p class="calc-note">Use sea water OR sea salt, not both.</p>
+                    </div>
+                </div>
+
+                <!-- Calcium Calculator -->
+                <div class="calculator-panel" id="calcium">
+                    <div class="calc-header">
+                        <h3>Calcium Supplement</h3>
+                        <span class="calc-badge">For laying hens</span>
+                    </div>
+                    <div class="calc-body">
+                        <div class="calc-input-section">
+                            <label for="ca-gallons">Water Volume</label>
+                            <div class="input-group">
+                                <input type="number" id="ca-gallons" value="1" min="0.1" step="0.1">
+                                <select id="ca-unit">
+                                    <option value="gallons">Gallons</option>
+                                    <option value="liters">Liters</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="calc-results single">
+                            <div class="result-card large">
+                                <span class="result-value" id="ca-wca">4</span>
+                                <span class="result-label">ml WCA</span>
+                            </div>
+                        </div>
+                        <p class="calc-note">Provide in a separate waterer from the main chick water formula. Essential
+                            for egg production.</p>
+                    </div>
+                </div>
+
+                <!-- Fermented Feed Calculator -->
+                <div class="calculator-panel" id="fermented-feed">
+                    <div class="calc-header">
+                        <h3>Fermented Chick Feed</h3>
+                        <span class="calc-badge">Enhanced nutrition</span>
+                    </div>
+                    <div class="calc-body">
+                        <div class="calc-input-section">
+                            <label for="ff-feed">Feed Amount</label>
+                            <div class="input-group">
+                                <input type="number" id="ff-feed" value="6" min="1" step="0.5">
+                                <select id="ff-unit">
+                                    <option value="lbs">Pounds</option>
+                                    <option value="kg">Kilograms</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="calc-results">
+                            <div class="result-card">
+                                <span class="result-value" id="ff-water-gal">1</span>
+                                <span class="result-label">gal Water</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-value" id="ff-labs">4</span>
+                                <span class="result-label">ml LABs</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-value" id="ff-fpj">8</span>
+                                <span class="result-label">ml FPJ</span>
+                            </div>
+                        </div>
+                        <p class="calc-note">Mix feed with water and additives. Cover loosely. Ready in 24hrs.</p>
+                    </div>
+                </div>
+
+                <!-- Coop Bedding Spray Calculator -->
+                <div class="calculator-panel" id="sos-mix">
+                    <div class="calc-header">
+                        <h3>Coop Bedding Spray</h3>
+                        <span class="calc-badge">Litter maintenance</span>
+                    </div>
+                    <div class="calc-body">
+                        <div class="calc-input-section">
+                            <label for="sos-gallons">Water Volume</label>
+                            <div class="input-group">
+                                <input type="number" id="sos-gallons" value="1" min="0.1" step="0.1">
+                                <select id="sos-unit">
+                                    <option value="gallons">Gallons</option>
+                                    <option value="liters">Liters</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="calc-results">
+                            <div class="result-card">
+                                <span class="result-value" id="sos-labs">4</span>
+                                <span class="result-label">ml LABs</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-value" id="sos-fpj">8</span>
+                                <span class="result-label">ml FPJ</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-value" id="sos-seawater">126</span>
+                                <span class="result-label">ml Seawater</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-value" id="sos-vinegar">8</span>
+                                <span class="result-label">ml Vinegar</span>
+                            </div>
+                        </div>
+                        <p class="calc-note">Lightly mist the floor once a week or twice a week during dry spells to
+                            prevent the litter from turning into dust and to keep microorganisms active.</p>
+                    </div>
+                </div>
+
+                <!-- Sea Water Calculator -->
+                <div class="calculator-panel" id="sea-water">
+                    <div class="calc-header">
+                        <h3>Fermented Sea Water</h3>
+                        <span class="calc-badge">Mineral boost</span>
+                    </div>
+                    <div class="calc-body">
+                        <div class="calc-input-section">
+                            <label for="sw-gallons">Water Volume</label>
+                            <div class="input-group">
+                                <input type="number" id="sw-gallons" value="1" min="0.1" step="0.1">
+                                <select id="sw-unit">
+                                    <option value="gallons">Gallons</option>
+                                    <option value="liters">Liters</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="calc-results">
+                            <div class="result-card">
+                                <span class="result-value" id="sw-seawater">126</span>
+                                <span class="result-label">ml Sea Water</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-value" id="sw-brv">19</span>
+                                <span class="result-label">ml BRV</span>
+                            </div>
+                            <div class="result-card">
+                                <span class="result-value" id="sw-wca">8</span>
+                                <span class="result-label">ml WCA</span>
+                            </div>
+                        </div>
+                        <p class="calc-note">Can be used immediately after mixing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">&#x1F331; Caribbean KNF</span>
+                    <p>Sustainable poultry farming through Korean Natural Farming practices.</p>
+                </div>
+                <div class="footer-nav">
+                    <a href="inputs.html">Inputs</a>
+                    <a href="recipes.html">Recipes</a>
+                    <a href="calculators.html">Calculators</a>
+                    <a href="knfcalculators.html">Agricultural KNF</a>
+                    <a href="protocol.html">Protocol</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Designed for Caribbean Farmers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
